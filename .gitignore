@@ -1,0 +1,22 @@
+# Env / secrets
+#.env
+#.env.*
+#!.env.example
+
+# Docker / runtime junk
+**/*.log
+logs/
+tmp/
+cache/
+storage/*.log
+
+# Dependency dirs (priklauso nuo stacko)
+node_modules/
+vendor/
+__pycache__/
+*.pyc
+
+# OS/editor
+.DS_Store
+.idea/
+.vscode/
