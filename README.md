@@ -19,4 +19,4 @@ AI-based assistant to identify different forms of misleading content. (DI grįst
    (CLOSESPIDER_PAGECOUNT nustato kiek padaro fetchu)
 
 ## Stop
-docker compose down
+1. docker compose down
