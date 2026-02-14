@@ -55,7 +55,7 @@ docker compose run --rm crawler python embedder.py --normalize --limit 100 --bat
 - limit- kiek straipsniu embeddina per viena promta
 - batch-size- kiek vienu metu embeddina
 
-nerekomenduoju daryti limito virs 100 ir batch-size virs 16
+nerekomenduoju daryti limito virs 100 ir batch-size virs 16. 
 might crash or cook cpu :P
 
 # Search
