@@ -51,3 +51,5 @@ docker compose run --rm crawler python chunker.py --limit 200 --target-chars 180
 ```
 docker compose run --rm crawler python embedder.py --normalize --limit 100 --batch-size 16
 ```
+nerekomenduoju daryti limito virs 100 ir batch-size virs 16
+might crash or cook cpu :P

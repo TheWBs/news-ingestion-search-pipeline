@@ -29,12 +29,16 @@ services:
     working_dir: /app
     volumes:
       - ./crawler:/app
+      - hf_cache:/root/.cache/huggingface
     environment:
       DB_HOST: db
       DB_PORT: 3306
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
+      HF_HOME: /root/.cache/huggingface
+      TRANSFORMERS_CACHE: /root/.cache/huggingface
+      SENTENCE_TRANSFORMERS_HOME: /root/.cache/huggingface
     depends_on:
       db:
         condition: service_healthy
@@ -44,6 +48,7 @@ services:
     working_dir: /app
     volumes:
       - ./crawler:/app
+      - hf_cache:/root/.cache/huggingface
     environment:
       DB_HOST: db
       DB_PORT: 3306
@@ -68,3 +73,4 @@ services:
 
 volumes:
   db_data:
+  hf_cache:
