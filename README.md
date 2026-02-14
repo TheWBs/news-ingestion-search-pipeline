@@ -1,7 +1,7 @@
 # AI_assistant
 AI-based assistant to identify different forms of misleading content. (DI grįstas asistentas skirtingoms klaidinančio turinio formoms atpažinti)
 
-# PVP Crawler
+# Crawler
 
 ## Requirements
 - Docker  
@@ -34,3 +34,8 @@ docker compose run --rm crawler scrapy crawl lrt_queue -s CLOSESPIDER_PAGECOUNT=
 #### Stop:
 docker compose down
 
+# Chunker
+docker compose run --rm crawler python chunker.py --limit 200 --target-chars 1800 --max-chars 2600 --overlap-paras 1
+
+# Embedder 
+docker compose run --rm crawler python embedder.py --normalize --limit 100 --batch-size 16
