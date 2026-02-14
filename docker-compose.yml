@@ -39,5 +39,32 @@ services:
       db:
         condition: service_healthy
 
+  crawler_scheduler:
+    build: ./crawler
+    working_dir: /app
+    volumes:
+      - ./crawler:/app
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      CRAWL_EVERY_MIN: ${CRAWL_EVERY_MIN}
+      CLOSESPIDER_PAGECOUNT: ${CLOSESPIDER_PAGECOUNT}
+    depends_on:
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "
+      while true; do
+        echo '[scheduler] running spider...';
+        scrapy crawl lrt_queue -s LOG_LEVEL=INFO -s CLOSESPIDER_PAGECOUNT=$${CLOSESPIDER_PAGECOUNT};
+        echo '[scheduler] sleep...';
+        sleep $$(($${CRAWL_EVERY_MIN} * 60));
+      done
+      "
+
+
 volumes:
   db_data:
