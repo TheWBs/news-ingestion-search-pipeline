@@ -46,10 +46,24 @@ docker compose down
 ```
 docker compose run --rm crawler python chunker.py --limit 200 --target-chars 1800 --max-chars 2600 --overlap-paras 1
 ```
+- limit- kiek straipsniu chunkina per viena karta
 
 # Embedder 
 ```
 docker compose run --rm crawler python embedder.py --normalize --limit 100 --batch-size 16
 ```
+- limit- kiek straipsniu embeddina per viena promta
+- batch-size- kiek vienu metu embeddina
+
 nerekomenduoju daryti limito virs 100 ir batch-size virs 16
 might crash or cook cpu :P
+
+# Search
+```
+docker compose run --rm crawler python search.py "Seimas padidino PVM 2024 metais" --topk 10 --limit 5000 --normalize-query
+```
+- topk- kiek grazina top atitinkanciu rezultatu
+- limit- kiek skirtingu embeddings analizuoja
+
+# Important
+Jei nepaaiskinau kazkurio kintamojo reiskias kad jo keisti negaaalima :P
