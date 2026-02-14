@@ -26,11 +26,19 @@ docker compose up -d
 
 ## Komandos
 #### Run:
+```
 docker compose up -d
+```
 #### Logai:
+```
 docker compose logs -f
+```
 #### Manual run (testavimui):
+```
 docker compose run --rm crawler scrapy crawl lrt_queue -s CLOSESPIDER_PAGECOUNT=20
+```
 #### Stop:
+```
 docker compose down
+```
 
