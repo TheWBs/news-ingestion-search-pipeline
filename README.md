@@ -43,7 +43,11 @@ docker compose down
 ```
 
 # Chunker
+```
 docker compose run --rm crawler python chunker.py --limit 200 --target-chars 1800 --max-chars 2600 --overlap-paras 1
+```
 
 # Embedder 
+```
 docker compose run --rm crawler python embedder.py --normalize --limit 100 --batch-size 16
+```
