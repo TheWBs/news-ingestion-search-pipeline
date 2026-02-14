@@ -26,13 +26,21 @@ docker compose up -d
 
 ## Komandos
 #### Run:
+```
 docker compose up -d
+```
 #### Logai:
+```
 docker compose logs -f
+```
 #### Manual run (testavimui):
+```
 docker compose run --rm crawler scrapy crawl lrt_queue -s CLOSESPIDER_PAGECOUNT=20
+```
 #### Stop:
+```
 docker compose down
+```
 
 # Chunker
 docker compose run --rm crawler python chunker.py --limit 200 --target-chars 1800 --max-chars 2600 --overlap-paras 1
