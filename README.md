@@ -262,7 +262,7 @@ If you changed the names of services:
 
 ## Search
 
-    docker compose run --rm crawler python search.py "Seimas padidino PVM 2024 metais" --topk 10 --limit 5000 --normalize-query
+    docker compose run --rm crawler python search.py "Seimas padidino šildymo mokesčius 2026 metais" --topk 10 --limit 5000 --normalize-query
 
 -   `topk` -- k amount of results returned
 -   `limit` -- Amount of embeddings analysed
