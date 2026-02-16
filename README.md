@@ -251,7 +251,7 @@ If you changed the names of services:
 
 -   `limit` -- Amount of articles being chunked
 
-### Tik embedder:
+### Only embedder:
 
     docker compose run --rm crawler python embedder.py --normalize --limit 100 --batch-size 16
 
