@@ -129,6 +129,10 @@ def main():
 
     # embed query (E5: naudoti prefix "query: ")
     st_model = SentenceTransformer(args.model, device=args.device)
+    
+    if args.device is not None and not str(args.device).strip():
+        args.device = None
+
     q_text = f"query: {args.query}"
     q_vec = st_model.encode([q_text], convert_to_numpy=True, show_progress_bar=False)[0].astype(np.float32)
 

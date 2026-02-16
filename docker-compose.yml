@@ -43,7 +43,7 @@ services:
       db:
         condition: service_healthy
 
-  crawler_scheduler:
+  pipeline_scheduler:
     build: ./crawler
     working_dir: /app
     volumes:
@@ -55,21 +55,59 @@ services:
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
+
       CRAWL_EVERY_MIN: ${CRAWL_EVERY_MIN}
       CLOSESPIDER_PAGECOUNT: ${CLOSESPIDER_PAGECOUNT}
+
+      CHUNK_LIMIT: ${CHUNK_LIMIT}
+      CHUNK_TARGET_CHARS: ${CHUNK_TARGET_CHARS}
+      CHUNK_MAX_CHARS: ${CHUNK_MAX_CHARS}
+      CHUNK_OVERLAP_PARAS: ${CHUNK_OVERLAP_PARAS}
+
+      EMBED_MODEL: ${EMBED_MODEL}
+      EMBED_LIMIT: ${EMBED_LIMIT}
+      EMBED_BATCH_SIZE: ${EMBED_BATCH_SIZE}
+      EMBED_DEVICE: ${EMBED_DEVICE}
+      EMBED_NORMALIZE: ${EMBED_NORMALIZE}
+      EMBED_PREFIX: ${EMBED_PREFIX}
+
+      HF_HOME: /root/.cache/huggingface
+      TRANSFORMERS_CACHE: /root/.cache/huggingface
+      SENTENCE_TRANSFORMERS_HOME: /root/.cache/huggingface
+
     depends_on:
       db:
         condition: service_healthy
+
     command: >
       sh -c "
+      set -e;
+
       while true; do
-        echo '[scheduler] running spider...';
+        echo '[pipeline] crawl...';
         scrapy crawl lrt_queue -s LOG_LEVEL=INFO -s CLOSESPIDER_PAGECOUNT=$${CLOSESPIDER_PAGECOUNT};
-        echo '[scheduler] sleep...';
+
+        echo '[pipeline] chunk until empty...';
+        while true; do
+          out=$$(python chunker.py --limit $${CHUNK_LIMIT} --target-chars $${CHUNK_TARGET_CHARS} --max-chars $${CHUNK_MAX_CHARS} --overlap-paras $${CHUNK_OVERLAP_PARAS});
+          echo \"$$out\";
+          echo \"$$out\" | grep -q 'No articles without chunks. Nothing to do.' && break;
+        done
+
+        echo '[pipeline] embed until empty...';
+        NORM_FLAG='';
+        if [ \"$${EMBED_NORMALIZE}\" = '1' ]; then NORM_FLAG='--normalize'; fi
+
+        while true; do
+          out=$$(python embedder.py --model \"$${EMBED_MODEL}\" --limit $${EMBED_LIMIT} --batch-size $${EMBED_BATCH_SIZE} $${NORM_FLAG} --device \"$${EMBED_DEVICE}\" --prefix \"$${EMBED_PREFIX}\");
+          echo \"$$out\";
+          echo \"$$out\" | grep -q 'No chunks without embeddings. Nothing to do.' && break;
+        done
+
+        echo '[pipeline] sleep...';
         sleep $$(($${CRAWL_EVERY_MIN} * 60));
       done
       "
-
 
 volumes:
   db_data:

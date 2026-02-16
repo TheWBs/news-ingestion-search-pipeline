@@ -123,6 +123,9 @@ def main():
         help="Prefix dokumentams (E5: 'passage: '), užklausoms vėliau naudosi 'query: '",
     )
     args = parser.parse_args()
+    
+    if args.device is not None and not str(args.device).strip():
+        args.device = None
 
     required_env = ["DB_HOST", "DB_USER", "DB_PASSWORD", "DB_NAME"]
     missing = [k for k in required_env if not os.environ.get(k)]
