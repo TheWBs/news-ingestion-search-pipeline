@@ -158,11 +158,13 @@ souces and information, from different European article sites.
 # --- Crawler ---
 CRAWL_EVERY_MIN=15
 CLOSESPIDER_PAGECOUNT=50
+
 ```
 -  `CRAWL_EVERY_MIN` -- How long the pipeline sleeps between cycles
 -  `CLOSESPIDER_PAGECOUNT` -- Limit of articles fetched
-```
 
+
+``` env
 # --- Chunking ---
 CHUNK_LIMIT=200
 CHUNK_TARGET_CHARS=1800
@@ -171,8 +173,8 @@ CHUNK_OVERLAP_PARAS=1
 ```
 -  `CHUNK_LIMIT` -- Amount of articles being chunked
 
-```
 
+``` env
 # --- Embeddings ---
 EMBED_MODEL=intfloat/multilingual-e5-small
 EMBED_LIMIT=200
@@ -185,7 +187,7 @@ EMBED_PREFIX=passage:
 - `EMBED_LIMIT` -- Amount of chunks being embedded during one pipeline cycle
 - `EMBED_BATCH_SIZE` --Amount of chunks embedded at the same time
 
-### Pastabos
+### Note
 
 -   `EMBED_DEVICE=` leave empty for auto (CPU).
 -   Not recomended:
