@@ -133,9 +133,9 @@ Initial repository setup: Dark-Rose-404
 
 ## Where is this project used?
 
-This project has been used in a AI based software to detect missleading
+-   This project has been used in a AI based software to detect missleading
 information based on Lithuanian article sites.\
-It is also used in development of a software meant to help writers cite
+-   It is also used in development of a software meant to help writers cite
 souces and information, from different European article sites.
 
 
