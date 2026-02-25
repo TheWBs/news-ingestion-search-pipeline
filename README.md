@@ -68,10 +68,10 @@ search infrastructure.
 ## Tech Stack
 
 -   **Python** -- Crawling, transformation, embedding pipeline
+-   **Docker & Docker Compose** -- Service orchestration
 -   **Scrapy** -- Web data ingestion
 -   **MariaDB** -- Database
 -   **Vector embeddings** -- Semantic indexing
--   **Docker & Docker Compose** -- Service orchestration
 -   **Adminer** -- Database inspection
 
 ------------------------------------------------------------------------
