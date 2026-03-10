@@ -118,7 +118,6 @@ task queues, or cloud deployment.
 ## Future Improvements
 
 -   Distributed task queue
--   Vector index optimization
 -   Cloud deployment
 -   Airflow orchestration
   
