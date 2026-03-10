@@ -155,7 +155,7 @@ souces and information, from different European article sites.
 
 ``` env
 # --- Crawler ---
-CRAWL_EVERY_MIN=15
+CRAWL_EVERY_MIN=5
 CLOSESPIDER_PAGECOUNT=50
 
 ```
